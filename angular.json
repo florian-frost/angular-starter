@@ -17,15 +17,37 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            //If a service worker is used baseHref and deployUrl must be commented
+            //Used if Angular goes in a subfolder instead of root directory
+            //"baseHref": "/angular/",
+            //"deployUrl": "/angular/",
             "outputPath": "dist/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
-              "src/assets",
-              "src/manifest.json"
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "/assets"
+              },
+              {
+                "glob": "favicon.ico",
+                "input": "src",
+                "output": "/"
+              },
+              {
+                "glob": ".htaccess",
+                "input": "src",
+                "output": "/"
+              }
+              ,
+              {
+                "glob": "manifest.json",
+                "input": "src",
+                "output": "/"
+              }
             ],
             "styles": [
               "src/styles.scss"
